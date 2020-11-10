@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-
+import os
 import sys
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from enum import Enum
@@ -12,8 +12,7 @@ PORT: int = 1212
 
 config = {
     '/': {'link': ''},
-    '/hello': {'command': ''},
-    '/muzo': {'link': 'http://muzo'},
+    '/muzo': {'link': 'http://n05a-eu.rcs.revma.com/1nnezw8qz7zuv'},
     '/ns': {'link': 'http://stream.rcs.revma.com/ypqt40u0x1zuv'},
     '/stop': {'command': 'mocp -s'},
     '/shutdown': {'command': 'sudo poweroff'}
@@ -30,9 +29,7 @@ class RadioStationHandler(BaseHTTPRequestHandler):
         self.server_version = SERVER_NAME
         self.sys_version = SERVER_VERSION
 
-        # print(self.path)
-
-        if (self.path in config.keys()):
+        if self.path in config.keys():
             response = Response.OK
             x = config.get(self.path)
 
@@ -60,12 +57,14 @@ def run(server_class=HTTPServer, handler_class=BaseHTTPRequestHandler):
 
 
 def run_command(command):
-    print("run command " + str(command))
+    if command.strip():
+        os.system(command)
     pass
 
 
 def play_link(link):
-    print("play link " + str(link))
+    if link.strip():
+        os.system('mocp -l {}'.format(link))
     pass
 
 
