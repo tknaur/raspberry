@@ -68,11 +68,15 @@ def play_link(link):
     pass
 
 
-def check_mocp():
+def check_moc_is_running():
+    r = os.system('pidof mocp >> /dev/null')
+    if r > 0:
+        print('Moc is not installed or the server is not running...\nExiting...')
     pass
 
 
 def main(argv):
+    check_moc_is_running()
     run(HTTPServer, RadioStationHandler)
 
 
