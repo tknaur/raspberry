@@ -23,8 +23,9 @@ config = {
 
 
 class Response(Enum):
-    OK = {'code': 200, 'msg': '-> Hello world!\n------------------\nAvailable URIs: \n' + ' \n'.join(config.keys())}
-    FAIL = {'code': 404, 'msg': 'Something is wrong here.'}
+    OK = dict(code=200, msg='-> Hello world!\n------------------\nAvailable URIs: \n{0}'.format(
+        ' \n'.join(config.keys())))
+    FAIL = dict(code=404, msg='Something is wrong here.')
 
 
 class RadioStationHandler(BaseHTTPRequestHandler):
@@ -32,13 +33,11 @@ class RadioStationHandler(BaseHTTPRequestHandler):
 
         self.server_version = SERVER_NAME
         self.sys_version = SERVER_VERSION
-
         output = ''
 
         if self.path in config.keys():
             response = Response.OK
             x = config.get(self.path)
-
             if 'command' in x:
                 output = run_command(x.get('command'))
             if 'link' in x:
