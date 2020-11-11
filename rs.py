@@ -8,7 +8,7 @@ from enum import Enum
 SERVER_NAME = '@mRadioStation'
 SERVER_VERSION = '0.1'
 
-PORT: int = 1212
+PORT = 1212
 
 config = {
     '/': {'link': ''},
@@ -72,6 +72,7 @@ def check_moc_is_running():
     r = os.system('pidof mocp >> /dev/null')
     if r > 0:
         print('Moc is not installed or the server is not running...\nExiting...')
+        sys.exit(0)
     pass
 
 
