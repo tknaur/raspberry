@@ -1,9 +1,11 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 import os
+import subprocess
 import sys
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from enum import Enum
+
 
 SERVER_NAME = '@mRadioStation'
 SERVER_VERSION = '0.1'
@@ -12,6 +14,7 @@ PORT = 1212
 
 config = {
     '/': {'link': ''},
+    '/info': {'command':'mocp -i'},
     '/muzo': {'link': 'http://n05a-eu.rcs.revma.com/1nnezw8qz7zuv'},
     '/ns': {'link': 'http://stream.rcs.revma.com/ypqt40u0x1zuv'},
     '/stop': {'command': 'mocp -s'},
@@ -20,33 +23,35 @@ config = {
 
 
 class Response(Enum):
-    OK = {'code': 200, 'msg': 'Hello world!\n\nAvailable URIs: \n' + ' \n'.join(config.keys())}
+    OK = {'code': 200, 'msg': '-> Hello world!\n------------------\nAvailable URIs: \n' + ' \n'.join(config.keys())}
     FAIL = {'code': 404, 'msg': 'Something is wrong here.'}
 
 
 class RadioStationHandler(BaseHTTPRequestHandler):
     def do_GET(self):
+
         self.server_version = SERVER_NAME
         self.sys_version = SERVER_VERSION
+
+        output = ''
 
         if self.path in config.keys():
             response = Response.OK
             x = config.get(self.path)
 
             if 'command' in x:
-                run_command(x.get('command'))
+                output = run_command(x.get('command'))
             if 'link' in x:
                 play_link(x.get('link'))
-
         else:
             response = Response.FAIL
 
         self.send_response(response.value['code'])
-        self.send_header("Content-type", "text/plain")
+        self.send_header("Content-type", "text/plain; charset=utf-8")
 
         self.end_headers()
-        self.wfile.write(response.value['msg'].encode())
-
+        o = response.value['msg'] + '\n------------------\n' + output
+        self.wfile.write(o.encode())
         return
 
 
@@ -58,8 +63,11 @@ def run(server_class=HTTPServer, handler_class=BaseHTTPRequestHandler):
 
 def run_command(command):
     if command.strip():
-        os.system(command)
-    pass
+        if 'mocp -i' in command:
+            return subprocess.getoutput(command)
+        else:
+            os.system(command)
+        return ""
 
 
 def play_link(link):
