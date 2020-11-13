@@ -23,8 +23,8 @@ config = {
 
 
 class Response(Enum):
-    OK = dict(code=200, msg='-> Hello world!\n------------------\nAvailable URIs: \n{0}'.format(
-        ' \n'.join(config.keys())))
+    OK = dict(code=200, msg='-> Hello world!\n----------------------------\nAvailable URIs: \n{0}'.format(
+        ' \n'.join(sorted(config.keys(), reverse=False))))
     FAIL = dict(code=404, msg='Something is wrong here.')
 
 
@@ -49,7 +49,7 @@ class RadioStationHandler(BaseHTTPRequestHandler):
         self.send_header("Content-type", "text/plain; charset=utf-8")
 
         self.end_headers()
-        o = response.value['msg'] + '\n------------------\n' + output
+        o = response.value['msg'] + '\n----------------------------\n' + output
         self.wfile.write(o.encode())
         return
 
