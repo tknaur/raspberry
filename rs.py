@@ -8,13 +8,14 @@ from enum import Enum
 
 
 SERVER_NAME = '@mRadioStation'
-SERVER_VERSION = '0.1'
+SERVER_VERSION = '0.1.1'
 
 PORT = 1212
 
 config = {
     '/': {'link': ''},
     '/info': {'command':'mocp -i'},
+    '/357': {'link': 'https://n09a-eu.rcs.revma.com/ye5kghkgcm0uv'},
     '/muzo': {'link': 'http://n05a-eu.rcs.revma.com/1nnezw8qz7zuv'},
     '/ns': {'link': 'http://stream.rcs.revma.com/ypqt40u0x1zuv'},
     '/stop': {'command': 'mocp -s'},
@@ -78,7 +79,7 @@ def play_link(link):
 def check_moc_is_running():
     r = os.system('pidof mocp >> /dev/null')
     if r > 0:
-        print('Moc is not installed or the server is not running...\nExiting...')
+        print('Moc is not installed or server is not running...\nExiting...')
         sys.exit(0)
     pass
 
