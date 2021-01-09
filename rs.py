@@ -15,7 +15,7 @@ PORT = 1212
 config = {
     '/': {'link': ''},
     '/info': {'command':'mocp -i'},
-    '/357': {'link': 'https://n09a-eu.rcs.revma.com/ye5kghkgcm0uv'},
+    '/357': {'link': 'http://n09a-eu.rcs.revma.com/ye5kghkgcm0uv'},
     '/muzo': {'link': 'http://n05a-eu.rcs.revma.com/1nnezw8qz7zuv'},
     '/ns': {'link': 'http://stream.rcs.revma.com/ypqt40u0x1zuv'},
     '/stop': {'command': 'mocp -s'},
