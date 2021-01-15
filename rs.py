@@ -18,6 +18,7 @@ config = {
     '/357': {'link': 'http://n09a-eu.rcs.revma.com/ye5kghkgcm0uv'},
     '/muzo': {'link': 'http://n05a-eu.rcs.revma.com/1nnezw8qz7zuv'},
     '/ns': {'link': 'http://stream.rcs.revma.com/ypqt40u0x1zuv'},
+    '/widzew': {'link': 'http://stream.radiojar.com/60r0062tnwzuv'},
     '/stop': {'command': 'mocp -s'},
     '/shutdown': {'command': 'sudo poweroff'}
 }
