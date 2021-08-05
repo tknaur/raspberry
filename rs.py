@@ -16,9 +16,13 @@ config = {
     '/': {'link': ''},
     '/info': {'command':'mocp -i'},
     '/357': {'link': 'http://n09a-eu.rcs.revma.com/ye5kghkgcm0uv'},
+	'/anty': {'link': 'http://an01.cdn.eurozet.pl/ant-waw.mp3'},
+	'/melo': {'link': 'http://ml03.cdn.eurozet.pl/mel-ldz.mp3'},
     '/muzo': {'link': 'http://n05a-eu.rcs.revma.com/1nnezw8qz7zuv'},
+	'/newonce': {'link': 'https://streamer.radio.co/s93b51ccc1/listen'},
     '/ns': {'link': 'http://stream.rcs.revma.com/ypqt40u0x1zuv'},
     '/widzew': {'link': 'http://stream.radiojar.com/60r0062tnwzuv'},
+	'/zak': {'link': 'http://www.radio.pionier.net.pl/stream.pls?radio=radiozak'},
     '/stop': {'command': 'mocp -s'},
     '/shutdown': {'command': 'sudo poweroff'}
 }
